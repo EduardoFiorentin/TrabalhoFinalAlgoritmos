@@ -1,0 +1,18 @@
+{
+    "products": [
+        {
+            "id": 1234,
+            "name":"nome",
+            "type": 1, 
+            "price": 19.90,
+            "avaliable": true
+        }
+    ],
+    "users": [
+        {
+            "name": "nome do usuário",
+            "login": "login de usuario",
+            "products": []
+        }
+    ]
+}
