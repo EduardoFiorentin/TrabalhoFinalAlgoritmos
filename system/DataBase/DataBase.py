@@ -25,4 +25,3 @@ data = DataBase()
 dic = {"name": "mula"}
 data.update(dic)
 data.originUpdate()
-data.originUpdate()
