@@ -66,7 +66,7 @@ class DataPrinter:
         allproductsdict = DataBase().data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "type", type)
         if allproductslist == []:
-            WarningPrinter.no_products_in_system_with_this_type()
+            WarningPrinter.no_products_with_this_type()
         else:
             printdataframe(allproductslist)
 

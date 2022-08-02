@@ -13,3 +13,8 @@
 
 # OBS: O id deve ser gerado pelo programa (pode ser um número aleatorio - deve ter 6 digitos)
 # OBS: Os itens devem estar na ordem em que aparacem no exemplo acima pra não dar conflito na hora de imprimir os dados 
+
+class Product: 
+    @staticmethod 
+    def new_product():
+        pass
