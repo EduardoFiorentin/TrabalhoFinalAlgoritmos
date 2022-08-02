@@ -83,4 +83,4 @@ class DataPrinter:
         else:
             printdataframe(allproductslist)
 
-DataPrinter.products_by_avaliability(True)
+# DataPrinter.products_by_ID(12345)

@@ -27,13 +27,19 @@ class DataBase:
         with open("database.json", 'w') as database:
             json.dump(json.dumps(self.data), database)
 
+    #adicionar um novo produto na base de dados 
+    def add_new_product(self, newProduct:dict()): 
+        self.data["products"].append(newProduct)
+        self.originUpdate()
+
     #modificar base de dados manualmente  
     def manual_data_base_update(self, newDataBase:dict()):
         with open("database.json", 'w') as database:
             json.dump(json.dumps(newDataBase), database)
 
 
-
+# database = DataBase()
+# database.add_new_product()
 
 
 
