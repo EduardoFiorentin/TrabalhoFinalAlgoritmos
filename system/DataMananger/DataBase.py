@@ -60,24 +60,66 @@ class DataBase:
 dicionario = {
     "products": [
         {
-            "id": 1234,
+            "id": 123456,
             "productName":"Cachorra tetuda - O filme",
-            "type": 1, 
+            "type": 2, 
             "price": 159000.99,
             "avaliable": True
         },
         {
-            "id": 2345,
+            "id": 234512,
             "productName":"De quatro no convento",
             "type": 2, 
             "price": 19.95,
             "avaliable": True
         },
         {
-            "id": 3456,
+            "id": 345665,
             "productName": "1001 noites sem beecrowd",
             "type": 3, 
             "price": 19.90,
+            "avaliable": True
+        },
+        {
+            "id": 654324,
+            "productName": "Como treinar seu dragão",
+            "type": 2, 
+            "price": 199.99,
+            "avaliable": False
+        },
+        {
+            "id": 936593,
+            "productName": "Cartas para Julieta",
+            "type": 2, 
+            "price": 49.90,
+            "avaliable": True
+        },
+        {
+            "id": 724963,
+            "productName": "Stranger Things",
+            "type": 1, 
+            "price": 19.90,
+            "avaliable": True
+        }, 
+        {
+            "id": 912478,
+            "productName": "Professor Polvo",
+            "type": 3, 
+            "price": 0,
+            "avaliable": True
+        },
+        {
+            "id": 825483,
+            "productName": "The good place",
+            "type": 1, 
+            "price": 59.90,
+            "avaliable": True
+        },
+        {
+            "id": 528439,
+            "productName": "O que fazemos nas sombras",
+            "type": 2, 
+            "price": 100,
             "avaliable": True
         }
     ],

@@ -1,3 +1,6 @@
+import uuid
+from SystemInputs import input_value
+
 # Fazer uma classe com um método estático new_product que possa ser chamado na hora de cadastrar um novo produto (opção 1 do código principal)
 
 # Ao ser chamado, o método deve pedir nome, tipo, preço e se tá disponível para venda. 
@@ -17,4 +20,20 @@
 class Product: 
     @staticmethod 
     def new_product():
-        pass
+        productname = input_value(str, "Nome do produto: ")
+        typ = input_value(int, "Tipo: ", beforemessage="Tipos:\n[1] - Serie\n[2] - Filme\n[3] - Documentário", limit=[1,3])
+        price = input_value(float, "Preço: ")
+        avaliable = True if input_value(int, "Disponível: ", "[1] - Disponível\n[2] - Indisponível", limit=[1,2]) == 1 else False
+
+        new_product =  {
+        "id": int(str(uuid.uuid1().int)[:6]),
+        "productName" : productname,
+        "type": typ, 
+        "price":  price,
+        "avaliable": avaliable
+        }
+
+        print(new_product)
+
+# Gerar id : int(str(uuid.uuid1().int)[:6])
+# Product.new_product()

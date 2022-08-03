@@ -8,6 +8,7 @@ def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
     dictlist = []
     for item in dictionare:
         locallist = []
+        # print(item) 
         for key, value in item.items():
 
             if key == "avaliable" and value == True: 
@@ -36,6 +37,7 @@ def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
 def printdataframe(allproductslist:list(list())):
     dataframe = pd.DataFrame(allproductslist, columns = ["ID", "Nome do produto", "Tipo", "Preço", "Disponivel"])
     print(dataframe)
+    print()
 
 
 class DataPrinter: 

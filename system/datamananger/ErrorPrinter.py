@@ -3,10 +3,9 @@ class ErrorPrinter:
     @staticmethod 
     def product_not_exists():
         print("Produto não encontrado! Tente novamente.")
+        print()
 
     # Erros pra SystemInput
-    @staticmethod 
     def invalid_value():
         print("Digito inválido. Tente novamente")
-
-    
+        print()
