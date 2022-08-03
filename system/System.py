@@ -24,8 +24,10 @@ class System:
             # Cadastrar novo produto
             elif option == 1:
                 SystemPrinter.menu_product_registration()
-                new_product = input()
-                # new_product = Product.new_product()
+                # new_product = input()
+                new_product = Product.new_product()
+                print(new_product)
+                input()
                 # self.database.add_new_product(new_product)
 
             # Mostrar produto por id 
