@@ -26,9 +26,7 @@ class System:
                 SystemPrinter.menu_product_registration()
                 # new_product = input()
                 new_product = Product.new_product()
-                print(new_product)
-                input()
-                # self.database.add_new_product(new_product)
+                self.database.add_new_product(new_product)
 
             # Mostrar produto por id 
             elif option == 2:
@@ -37,10 +35,29 @@ class System:
                     identification = input_value(int, "ID: ")
                     if identification == -1: break
                     SystemPrinter.menu_find_product_by_id()
-                    DataPrinter.products_by_ID(identification)
+                    DataPrinter.products_by_ID(self.database, identification)
 
             # Atualizar produto 
+            elif option == 3:
+                while True:
+                    SystemPrinter.menu_update_product(self.database)
+                    changes = {}
+                    id = input_value(int, "ID: ", beforemessage="Digite o ID do produto a ser modificado:\n[-1] - Sair")
+                    if id == -1 : break
 
+                    while True: 
+                        console_clear()
+                        DataPrinter.products_by_ID(self.database, id)
+                        param = input_value(int, "Qual valor deseja modificar: ", beforemessage="[1] - Nome\n[2] - Tipo\n[3] - Preço\n[4] - Disponibilidade\n[-1] - Salvar e sair")
+
+                        if param == -1: break
+                        if param == 1: changes["productName"] = input_value(str, "Novo nome: ")
+                        if param == 2: changes["type"] = input_value(int, "Novo tipo: ", beforemessage="[1] - Série\n[2] - Filme\n[3] - Documentario", limit=[1,3], consoleclear=True)
+                        if param == 3: changes["price"] = input_value(float, "Novo preço: ")
+                        if param == 4: changes["avaliable"] = True if input_value(int, "Disponivel: ", beforemessage="[1] - Disponível\n[2] - Indisponível", limit=[1,2], consoleclear=True) == 1 else False
+
+                    print(changes)
+                    input()
 
             # Relatorio de produto 
             elif option == 4:
@@ -51,12 +68,12 @@ class System:
 
                     SystemPrinter.menu_products_report()
 
-                    if choose == 0: DataPrinter.all_products()
-                    elif choose == 1: DataPrinter.products_by_type(2)
-                    elif choose == 2: DataPrinter.products_by_type(1)
-                    elif choose == 3: DataPrinter.products_by_type(3)
-                    elif choose == 4: DataPrinter.products_by_avaliability(True)
-                    elif choose == 5: DataPrinter.products_by_avaliability(False)
+                    if choose == 0: DataPrinter.all_products(self.database)
+                    elif choose == 1: DataPrinter.products_by_type(self.database, 2)
+                    elif choose == 2: DataPrinter.products_by_type(self.database, 1)
+                    elif choose == 3: DataPrinter.products_by_type(self.database, 3)
+                    elif choose == 4: DataPrinter.products_by_avaliability(self.database, True)
+                    elif choose == 5: DataPrinter.products_by_avaliability(self.database, False)
                     else: ErrorPrinter.invalid_value()
 
 

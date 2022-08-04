@@ -2,8 +2,10 @@ import pandas as pd
 from DataBase import DataBase
 from ErrorPrinter import ErrorPrinter
 from WarningPrinter import WarningPrinter
+
 # Converte a lista de dicionarios recebidos da base de dados em uma lista de listas (requisito para o tabulação do pandas)
     # a função também funciona com filtros - filter é o tipo de filtro (por id, nome, etc), e a keyFilter é o nome do filtro em sí (o id que se quer, o nome que se quer, etc)
+
 def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
     dictlist = []
     for item in dictionare:
@@ -15,6 +17,13 @@ def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
                 value = "Sim"
             elif key == "avaliable" and value == False:
                 value = "Não"
+
+            if key == "type" and value == 1:
+                value = "Série"
+            elif key == "type" and value == 2:
+                value = "Filme"
+            elif key == "type" and value == 3:
+                value = "Documentario"
 
             locallist.append(value)
 
@@ -44,8 +53,8 @@ class DataPrinter:
 
     # IMPRIMIR TODOS OS PRODUTOS
     @staticmethod
-    def all_products():
-        allproductsdict = DataBase().data["products"]
+    def all_products(database):
+        allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict)
         if allproductslist == []:
             WarningPrinter.no_products_in_system()
@@ -54,8 +63,8 @@ class DataPrinter:
 
     # CONSULTA DE PRODUTOS POR ID
     @staticmethod 
-    def products_by_ID(id:int):
-        allproductsdict = DataBase().data["products"]
+    def products_by_ID(database, id:int):
+        allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "ID", id)
         if allproductslist == []:
             ErrorPrinter.product_not_exists()
@@ -64,8 +73,8 @@ class DataPrinter:
 
     # CONSULTA POR NOME (?)
     @staticmethod
-    def products_by_name(type:str):
-        allproductsdict = DataBase().data["products"]
+    def products_by_name(database, type:str):
+        allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "name", type)
         if allproductslist == []:
             WarningPrinter.no_products_with_this_name()
@@ -74,8 +83,8 @@ class DataPrinter:
 
     # CONSULTA DE PRODUTOS POR TIPO
     @staticmethod 
-    def products_by_type(type:int):
-        allproductsdict = DataBase().data["products"]
+    def products_by_type(database, type:int):
+        allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "type", type)
         if allproductslist == []:
             WarningPrinter.no_products_with_this_type()
@@ -86,8 +95,8 @@ class DataPrinter:
 
     # CONSULTA DE PRODUTOS POR DISPONIBILIDADE
     @staticmethod
-    def products_by_avaliability(avaliability:bool=True):
-        allproductsdict = DataBase().data["products"]
+    def products_by_avaliability(database, avaliability:bool=True):
+        allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "avaliable", avaliability)
         if allproductslist == []:
             if avaliability == True:

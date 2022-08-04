@@ -7,12 +7,27 @@ from SystemPrinter import console_clear
     # beforemessage - (opcional) Mensagem que aparece na linha de cima do input
     # limit - (opcional) recebe uma lista com os valores minimo e máximo que o input aceite
     # consoleclear (opcional) - caso receba True, o console será limpo após cada tentativa errada de input
+    # beforeinputclear (opcional) - caso receba True, o console será limpo antes do input 
 
-def input_value(typ:type, message:str, beforemessage=False, limit:list=[], consoleclear=False):
+def input_value(typ:type, message:str, beforemessage=False, limit:list=[], consoleclear=False, beforeinputclear=False):
     while True: 
         try: 
+            if beforeinputclear:
+                console_clear()
+
+            # if beforemessage != False:
+            #     print(beforemessage)
+
             if beforemessage != False:
-                print(beforemessage)
+                if type(beforemessage) == list:
+                    for item in beforemessage: 
+                        if type(item) == str:
+                            print(item)
+                        else: 
+                            item() 
+                else: 
+                    print(beforemessage)
+
 
             value = typ(input(message))
             if limit != []:

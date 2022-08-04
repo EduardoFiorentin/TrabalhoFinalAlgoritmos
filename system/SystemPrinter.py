@@ -1,4 +1,5 @@
 import os
+from DataPrinter import DataPrinter
 
 def console_clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -70,9 +71,24 @@ class SystemPrinter:
     #Carrinho:
     def client_menu_shopping():
         print('''Login efetuado. Selecione o produto que você deseja comprar
-        Obs. : você pode procurar po nome''')
+        Obs. : você pode procurar por nome''')
     #Compras (Nota fiscal):
     def client_menu_receipt():
         print('''Suas compras foram realizadas com sucesso!
         Aqui está um resumo:''')
         # Exibe uma tabela, vai precisar de uma função
+
+
+    #ATUALIZAÇÃO DE PRODUTOS 
+    def menu_update_product(database):
+        console_clear()
+        print("-----------------------------------")
+        print("     Atualização de produtos       ")
+        print("-----------------------------------")
+        print()
+        print("Produtos:")
+        DataPrinter.all_products(database)
+        print()
+        
+        
+        
