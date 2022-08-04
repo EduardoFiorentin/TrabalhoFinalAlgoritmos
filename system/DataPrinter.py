@@ -62,6 +62,16 @@ class DataPrinter:
         else:
             printdataframe(allproductslist)
 
+    # CONSULTA POR NOME (?)
+    @staticmethod
+    def products_by_name(type:str):
+        allproductsdict = DataBase().data["products"]
+        allproductslist = convert_dict_to_list(allproductsdict, "name", type)
+        if allproductslist == []:
+            WarningPrinter.no_products_with_this_name()
+        else:
+            printdataframe(allproductslist)
+
     # CONSULTA DE PRODUTOS POR TIPO
     @staticmethod 
     def products_by_type(type:int):
@@ -71,6 +81,8 @@ class DataPrinter:
             WarningPrinter.no_products_with_this_type()
         else:
             printdataframe(allproductslist)
+
+    # CONSULTA POR FAIXA DE PREÇO *
 
     # CONSULTA DE PRODUTOS POR DISPONIBILIDADE
     @staticmethod

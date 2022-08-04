@@ -58,3 +58,21 @@ class SystemPrinter:
         print("[5] - Indisponíveis")
         print("[-1] - Sair")
         print()
+
+    #TELA DO CLIENTE:
+    #Login:
+    def client_menu_login():
+        print("-----------------------------------")
+        print("           Área do Cliente         ")
+        print("-----------------------------------")
+        print('Faça seu Login para ter acesso à compras')
+        # Função de cadastro...
+    #Carrinho:
+    def client_menu_shopping():
+        print('''Login efetuado. Selecione o produto que você deseja comprar
+        Obs. : você pode procurar po nome''')
+    #Compras (Nota fiscal):
+    def client_menu_receipt():
+        print('''Suas compras foram realizadas com sucesso!
+        Aqui está um resumo:''')
+        # Exibe uma tabela, vai precisar de uma função

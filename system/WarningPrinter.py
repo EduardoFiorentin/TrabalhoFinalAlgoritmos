@@ -20,3 +20,8 @@ class WarningPrinter:
     def no_products_unvaliables():
         print("Não há produtos indisponiveis no sistema!")
         print()
+
+    @staticmethod
+    def no_produts_with_this_name():
+        print("Não há produtos com esse nome cadastrados no sistema!")
+        print()
