@@ -63,13 +63,16 @@ class DataPrinter:
 
     # CONSULTA DE PRODUTOS POR ID
     @staticmethod 
-    def products_by_ID(database, id:int):
+    def products_by_ID(database, id:int, print=True):
         allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "ID", id)
         if allproductslist == []:
             ErrorPrinter.product_not_exists()
         else:
-            printdataframe(allproductslist)
+            if print:
+                printdataframe(allproductslist)
+            else:
+                return pd.DataFrame(allproductslist, columns = ["ID", "Nome do produto", "Tipo", "Preço", "Disponivel"])
 
     # CONSULTA POR NOME (?)
     @staticmethod

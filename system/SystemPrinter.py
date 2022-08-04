@@ -80,12 +80,16 @@ class SystemPrinter:
 
 
     #ATUALIZAÇÃO DE PRODUTOS 
+    def menu_start_update_products(display=True):
+        if display:
+            console_clear()
+            print("-----------------------------------")
+            print("     Atualização de produtos       ")
+            print("-----------------------------------")
+        else:
+            return "-----------------------------------\n     Atualização de produtos       \n-----------------------------------\n"
+
     def menu_update_product(database):
-        console_clear()
-        print("-----------------------------------")
-        print("     Atualização de produtos       ")
-        print("-----------------------------------")
-        print()
         print("Produtos:")
         DataPrinter.all_products(database)
         print()

@@ -37,9 +37,14 @@ class DataBase:
         with open("database.json", 'w') as database:
             json.dump(json.dumps(newDataBase), database)
 
+    # Verifica se um id existe na base de dados 
+    def id_exists(self, id):
+        for item in self.data["products"]:
+            if item["id"] == id:
+                return True
+        return False
 
-# database = DataBase()
-# database.add_new_product()
+
 
 
 
