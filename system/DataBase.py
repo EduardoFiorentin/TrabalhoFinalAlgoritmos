@@ -21,6 +21,16 @@ class DataBase:
             for newkey, newvalue in data.items(): 
                 if newkey == key and newkey != "id":
                     self.data[key] = newvalue
+    
+    def productUpdate(self, id:int, data:dict()):
+        for item in self.data["products"]:
+            if item["id"] == id:
+                for key, value in item.items():
+                    for newkey, newvalue in data.items():
+                        if key != "id" and key == newkey:
+                            item[key] = newvalue
+            
+        self.originUpdate()
 
     #manda o self.database pro database 
     def originUpdate(self):
