@@ -62,8 +62,10 @@ class DataPrinter:
             printdataframe(allproductslist)
 
     # CONSULTA DE PRODUTOS POR ID
+        # print(opcional) - se receber False, retorna o item ao invés de printa-los diretamente
+        # lst (opcioanal) - funciona apenas quando print=False - Se receber True, retorna os dados em lista ao invés de dataframe
     @staticmethod 
-    def products_by_ID(database, id:int, print=True):
+    def products_by_ID(database, id:int, print=True, lst=False):
         allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "ID", id)
         if allproductslist == []:
@@ -72,6 +74,8 @@ class DataPrinter:
             if print:
                 printdataframe(allproductslist)
             else:
+                if lst:
+                    return allproductslist
                 return pd.DataFrame(allproductslist, columns = ["ID", "Nome do produto", "Tipo", "Preço", "Disponivel"])
 
     # CONSULTA POR NOME (?)
@@ -109,4 +113,14 @@ class DataPrinter:
         else:
             printdataframe(allproductslist)
 
-# DataPrinter.products_by_ID(12345)
+
+    def purchase_receipt(products): 
+        table = pd.DataFrame(products, columns = ["Código", "Nome do produto", "Tipo", "Preço", "Data de compra"])
+        print(table)
+
+
+    def purchace_report(database):
+        data = database.data["purchaseHistory"]
+        data = convert_dict_to_list(data)
+        table = pd.DataFrame(data, columns = ["Login", "Valor total", "Data da compra"])
+        print(table)

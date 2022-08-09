@@ -23,7 +23,10 @@ def input_value(typ:type, message:str, beforemessage=False, limit:list=[], conso
                 if type(beforemessage) == list:
                     for item in beforemessage: 
                         if type(item) == list:
-                            item[0](item[1])
+                            if len(item) == 1:
+                                item[0]()
+                            elif len(item) == 2:
+                                item[0](item[1])
                         else:
                             print(item)
                 else: 

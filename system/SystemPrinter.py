@@ -61,17 +61,21 @@ class SystemPrinter:
         print()
 
     #TELA DO CLIENTE:
-    #Login:
-    def client_menu_login():
+    def client_menu_header():
         print("-----------------------------------")
         print("           Área do Cliente         ")
         print("-----------------------------------")
+    #Login:
+    def client_menu_login():
         print('Faça seu Login para ter acesso à compras')
         # Função de cadastro...
+
+    #Login:
+
     #Carrinho:
     def client_menu_shopping():
-        print('''Login efetuado. Selecione o produto que você deseja comprar
-        Obs. : você pode procurar por nome''')
+        print("Login efetuado. Selecione o produto que você deseja comprar")
+        
     #Compras (Nota fiscal):
     def client_menu_receipt():
         print('''Suas compras foram realizadas com sucesso!
@@ -94,5 +98,7 @@ class SystemPrinter:
         DataPrinter.all_products(database)
         print()
         
+
+    
         
         

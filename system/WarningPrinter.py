@@ -25,3 +25,7 @@ class WarningPrinter:
     def no_produts_with_this_name():
         print("Não há produtos com esse nome cadastrados no sistema!")
         print()
+
+    def product_added():
+        print("Produto adicionado ao carrinho!")
+        print()

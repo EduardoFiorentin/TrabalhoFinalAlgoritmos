@@ -2,6 +2,7 @@ import json
 import sys
 from termcolor import colored, cprint
 import os
+import datetime
 
 class DataBase: 
     def __init__(self):
@@ -22,6 +23,7 @@ class DataBase:
                 if newkey == key and newkey != "id":
                     self.data[key] = newvalue
     
+    # Faz o update de um produto existente
     def productUpdate(self, id:int, data:dict()):
         for item in self.data["products"]:
             if item["id"] == id:
@@ -55,11 +57,28 @@ class DataBase:
         return False
 
 
+    def client_exists(self, client:str):
+        for user in self.data["users"]:
+            if user["login"] == client:
+                return True
+        return False
 
+    def save_buying(self, client_login, products_list, total_value):
+        for user in self.data["users"]:
+            if user["login"] == client_login:
+                for product in products_list:
+                    user["products"].append(product)
 
+        historic = {
+            "login": client_login, 
+            "total_value": total_value,
+            "date": datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+        }
+        self.data["purchaseHistory"].append(historic)
 
+        self.originUpdate()
 
-
+    
 
 
 
@@ -145,18 +164,12 @@ dicionario = {
             "products": []
         }
     ],
-    "purchaseHistory": [
-        {
-            "productID": 1234,
-            "user": "Admin", 
-            "productName": "ProductTest",
-            "date": "data de compra"
-        }
-    ]
+    "purchaseHistory": []
 }
 
 # database = DataBase()
 # database.manual_data_base_update(dicionario)
+# database.print_buy()
 
 
 # -------------------------------------------------------------------------------------
