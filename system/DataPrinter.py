@@ -56,6 +56,7 @@ class DataPrinter:
     def all_products(database):
         allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict)
+        allproductslist = sorted(allproductslist, key=lambda product: product[1])
         if allproductslist == []:
             WarningPrinter.no_products_in_system()
         else:
@@ -93,6 +94,7 @@ class DataPrinter:
     def products_by_type(database, type:int):
         allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "type", type)
+        allproductslist = sorted(allproductslist, key=lambda product: product[1])
         if allproductslist == []:
             WarningPrinter.no_products_with_this_type()
         else:
@@ -104,6 +106,7 @@ class DataPrinter:
     def products_by_avaliability(database, avaliability:bool=True):
         allproductsdict = database.data["products"]
         allproductslist = convert_dict_to_list(allproductsdict, "avaliable", avaliability)
+        allproductslist = sorted(allproductslist, key=lambda product: product[1])
         if allproductslist == []:
             if avaliability == True:
                 WarningPrinter.no_products_avaliables()
