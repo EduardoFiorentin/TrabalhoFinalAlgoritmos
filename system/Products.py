@@ -5,6 +5,8 @@ from SystemInputs import input_value
 from SystemPrinter import SystemPrinter, console_clear
 
 class Product: 
+
+    # GERAR NOVO PRODUTO
     @staticmethod 
     def new_product():
         productname = input_value(str, "Nome do produto: ")
@@ -33,6 +35,3 @@ class Product:
 
         return new_product
     
-
-# Gerar id : int(str(uuid.uuid1().int)[:6])
-# Product.new_product()

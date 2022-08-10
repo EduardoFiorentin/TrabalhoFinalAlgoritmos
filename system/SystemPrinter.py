@@ -1,11 +1,12 @@
 import os
-from DataPrinter import DataPrinter
+# from DataPrinter import DataPrinter
 
 def console_clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 class SystemPrinter: 
+    # MENU INICIAL 
     @staticmethod
     def menu_header_start():
         console_clear()
@@ -29,8 +30,9 @@ class SystemPrinter:
         print("[5] Registrar compra")
         print("[6] Relatorio de compras")
         print("[-1] Finalizar Programa")
-        print()
 
+
+    # MENUS OPÇÃO 1 
     def menu_product_registration():
         console_clear()
         print("-----------------------------------")
@@ -38,6 +40,8 @@ class SystemPrinter:
         print("-----------------------------------")
         print()
 
+
+    # MENUS OPÇÃO 2
     def menu_find_product_by_id(): 
         console_clear()
         print("-----------------------------------")
@@ -46,6 +50,24 @@ class SystemPrinter:
         print("[ID] - Consultar produto\n[-1] - Voltar")
         print()
 
+
+    # MENUS OPÇÃO 3
+    def menu_start_update_products(display=True):
+        if display:
+            console_clear()
+            print("-----------------------------------")
+            print("     Atualização de produtos       ")
+            print("-----------------------------------")
+        else:
+            return "-----------------------------------\n     Atualização de produtos       \n-----------------------------------\n"
+
+    def menu_update_product(database):
+        print("Produtos:")
+        # DataPrinter.all_products(database)
+        print()
+
+
+    # MENUS OPÇÃO 4
     def menu_products_report(): 
         console_clear()
         print("-----------------------------------")
@@ -60,45 +82,46 @@ class SystemPrinter:
         print("[-1] - Sair")
         print()
 
-    #TELA DO CLIENTE:
+
+    # MENUS OPÇÃO 5
     def client_menu_header():
         print("-----------------------------------")
         print("           Área do Cliente         ")
         print("-----------------------------------")
-    #Login:
+    
     def client_menu_login():
-        print('Faça seu Login para ter acesso à compras')
-        # Função de cadastro...
+        print('Insira o login do usuário')
+        print("[-1] - Sair")
 
-    #Login:
-
-    #Carrinho:
     def client_menu_shopping():
-        print("Login efetuado. Selecione o produto que você deseja comprar")
-        
-    #Compras (Nota fiscal):
-    def client_menu_receipt():
-        print('''Suas compras foram realizadas com sucesso!
-        Aqui está um resumo:''')
-        # Exibe uma tabela, vai precisar de uma função
+        print("Login efetuado.")
+        print()
 
-
-    #ATUALIZAÇÃO DE PRODUTOS 
-    def menu_start_update_products(display=True):
-        if display:
-            console_clear()
-            print("-----------------------------------")
-            print("     Atualização de produtos       ")
-            print("-----------------------------------")
-        else:
-            return "-----------------------------------\n     Atualização de produtos       \n-----------------------------------\n"
-
-    def menu_update_product(database):
-        print("Produtos:")
-        DataPrinter.all_products(database)
+    def product_added():
+        print("Produto adicionado ao carrinho!")
         print()
         
+    def client_menu_receipt():
+        print("-----------------------------------")
+        print("            Nota fiscal            ")
+        print("-----------------------------------")
+        print()
 
-    
+    def client_menu_no_products():
+        print("Nenhum produto foi adicionado ao carrinho!")
         
+
+    # MENUS OPÇÃO 6
+    def menu_purchace_report():
+        print("-----------------------------------")
+        print("       Relatório de compras        ")
+        print("-----------------------------------")
+        print()
+
+    def menu_no_purchace_historic():
+        print("Não há compras no histórico!")
         
+
+    # PAUSA NA EXECUÇÃO
+    def pause():
+        input("\nPressione enter para continuar")

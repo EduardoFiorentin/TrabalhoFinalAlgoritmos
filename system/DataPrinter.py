@@ -2,6 +2,7 @@ import pandas as pd
 from DataBase import DataBase
 from ErrorPrinter import ErrorPrinter
 from WarningPrinter import WarningPrinter
+from SystemPrinter import SystemPrinter
 
 # Converte a lista de dicionarios recebidos da base de dados em uma lista de listas (requisito para o tabulação do pandas)
     # a função também funciona com filtros - filter é o tipo de filtro (por id, nome, etc), e a keyFilter é o nome do filtro em sí (o id que se quer, o nome que se quer, etc)
@@ -10,7 +11,6 @@ def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
     dictlist = []
     for item in dictionare:
         locallist = []
-        # print(item) 
         for key, value in item.items():
 
             if key == "avaliable" and value == True: 
@@ -78,7 +78,7 @@ class DataPrinter:
                     return allproductslist
                 return pd.DataFrame(allproductslist, columns = ["ID", "Nome do produto", "Tipo", "Preço", "Disponivel"])
 
-    # CONSULTA POR NOME (?)
+    # CONSULTA POR NOME 
     @staticmethod
     def products_by_name(database, type:str):
         allproductsdict = database.data["products"]
@@ -98,7 +98,6 @@ class DataPrinter:
         else:
             printdataframe(allproductslist)
 
-    # CONSULTA POR FAIXA DE PREÇO *
 
     # CONSULTA DE PRODUTOS POR DISPONIBILIDADE
     @staticmethod
@@ -113,14 +112,19 @@ class DataPrinter:
         else:
             printdataframe(allproductslist)
 
-
+    # GERA CUPOM FISCAL DE COMPRA
     def purchase_receipt(products): 
         table = pd.DataFrame(products, columns = ["Código", "Nome do produto", "Tipo", "Preço", "Data de compra"])
         print(table)
 
 
+    # GERA O RELATÓRIO DE COMPRAS 
     def purchace_report(database):
         data = database.data["purchaseHistory"]
         data = convert_dict_to_list(data)
-        table = pd.DataFrame(data, columns = ["Login", "Valor total", "Data da compra"])
-        print(table)
+        if data == []:
+            # SystemPrinter.menu_no_purchace_historic()
+            print('sem produtos')
+        else:
+            table = pd.DataFrame(data, columns = ["Login", "Valor total", "Data da compra"])
+            print(table)

@@ -54,5 +54,3 @@ def input_value(typ:type, message:str, beforemessage=False, limit:list=[], conso
                 console_clear()
             ErrorPrinter.invalid_value()
             continue
-
-# input_value(int, "Digite um número: ")

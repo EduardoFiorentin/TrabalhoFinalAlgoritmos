@@ -12,3 +12,5 @@ class ErrorPrinter:
 
     def client_not_exists():
         print('Cliente não encontrado. Insira o login novamente...')
+        print("[-1] - Sair")
+        print()

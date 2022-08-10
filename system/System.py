@@ -5,7 +5,6 @@ from DataBase import DataBase
 from Products import Product
 from ErrorPrinter import ErrorPrinter
 from WarningPrinter import WarningPrinter
-from SystemInput import system_input
 import datetime
 
 class System: 
@@ -20,10 +19,7 @@ class System:
 
             SystemPrinter.menu_main_options()
             option = input_value(int, "Opção: ")
-            # option = system_input(int, inputMessage="Opção: ",
-            #  beforeInputMessage=[[SystemPrinter.menu_main_options]],
-            #  )
-
+ 
             # Fechar o sistema 
             if option == -1: break
 
@@ -44,10 +40,11 @@ class System:
 
             # Atualizar produto 
             elif option == 3:
+                # gera um dicionário com todos os parâmetros modificados. Ao final, passa este para uma função na base de dados que salva as alterações 
                 while True:
                     changes = {}
                     SystemPrinter.menu_start_update_products()
-                    id = input_value(int, "ID: ", beforemessage=[[SystemPrinter.menu_update_product, self.database], "Digite o ID do produto a ser modificado:\n[-1] - Sair"], consoleclear=True)
+                    id = input_value(int, "ID: ", beforemessage=["Produtos: ", [DataPrinter.all_products, self.database], "Digite o ID do produto a ser modificado:\n[-1] - Sair"], consoleclear=True)
 
                     if id == -1 : break
 
@@ -56,8 +53,11 @@ class System:
                             console_clear()
 
                             SystemPrinter.menu_start_update_products()
+
+                            # Imprime o produto que está sendo modificado 
                             DataPrinter.products_by_ID(self.database, id)
                             
+                            # Solicita o parâmetro a ser modificado 
                             param = input_value(int, "Qual valor deseja modificar: ", beforemessage="[1] - Nome\n[2] - Tipo\n[3] - Preço\n[4] - Disponibilidade\n[-1] - Salvar e sair\n[-2] - Sair sem salvar\n", consoleclear=True)
 
                             if param == -1 or param == -2: break
@@ -74,6 +74,7 @@ class System:
                         continue
 
                     if param == -1:
+                        # Envia as modificações pra base de dados 
                         self.database.productUpdate(id, changes)
                     
 
@@ -97,45 +98,61 @@ class System:
 
             # Registrar compra 
             elif option == 5:
-                # TELA: LogIn do cliente 
-                console_clear()
-                SystemPrinter.client_menu_header()
-                SystemPrinter.client_menu_login()
                 while True:
+                    # TELA: LogIn do cliente 
+                    console_clear()
+                    SystemPrinter.client_menu_header()
+                    SystemPrinter.client_menu_login()
+
                     client_login = input_value(str, "Login do cliente: ")
+
                     if client_login == "-1": break
 
+                    # verifica se o cliente existe
                     client_exists = self.database.client_exists(client_login)
+
                     # TELA: Adição dos produtos 
                     if client_exists:
                         products_list = []
                         total_value = 0
+
                         console_clear()
                         SystemPrinter.client_menu_header()
                         SystemPrinter.client_menu_shopping()
 
                         while True:
+                            # Solicita o id do produto a ser adicionado 
                             id = input_value(int, "ID do produto: ", beforemessage="[ID] - Adicionar produto\n[-1] -  Encerrar compra\n[-2] - Cancelar compra")
                             if id == -2: break
+
                             if id == -1:
                                 self.database.save_buying(client_login, products_list, total_value)
+
                                 # TELA: Cupom fiscal 
                                 console_clear()
-                                DataPrinter.purchase_receipt(products_list)
-                                print(f"Total: {total_value}")
-                                break
 
+                                if products_list == []:
+                                    SystemPrinter.client_menu_header()
+                                    SystemPrinter.client_menu_no_products()
+                                else:
+                                    SystemPrinter.client_menu_receipt()
+                                    DataPrinter.purchase_receipt(products_list)
+                                    print(f"Total: {total_value:.2f}\n")
+                                
+                                SystemPrinter.pause()
+                                break
+                            
+                            #se o produto com id digirado existir, este é adicionado á lista de compras 
                             if self.database.id_exists(id):
 
-                                product = DataPrinter.products_by_ID(self.database, id, print=False, lst=True)
-                                product = product[0]
+                                product = DataPrinter.products_by_ID(self.database, id, print=False, lst=True)[0]
                                 product[-1] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
                                 total_value += product[3]
                                 products_list.append(product)
 
                                 console_clear()
                                 SystemPrinter.client_menu_header()
-                                WarningPrinter.product_added()
+                                SystemPrinter.product_added()
 
                             else:
                                 console_clear()
@@ -147,14 +164,13 @@ class System:
                         SystemPrinter.client_menu_header()
                         ErrorPrinter.client_not_exists()
 
-                    # break
-                
 
             # Relatorio de compra 
             elif option == 6:
                 console_clear()
+                SystemPrinter.menu_purchace_report()
                 DataPrinter.purchace_report(self.database)
-                input("Pressione enter para continuar:")
+                SystemPrinter.pause()
             
             console_clear()
             SystemPrinter.menu_header()
