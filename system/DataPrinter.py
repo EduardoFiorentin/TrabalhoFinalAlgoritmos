@@ -42,7 +42,7 @@ def convert_dict_to_list(dictionare:list(dict()), filter=None, keyFilter=None):
 
     return dictlist
 
-# Imprime a tabela de itens
+# Gera e imprime a tabela de itens
 def printdataframe(allproductslist:list(list())):
     dataframe = pd.DataFrame(allproductslist, columns = ["ID", "Nome do produto", "Tipo", "Preço", "Disponivel"])
     print(dataframe)
@@ -126,8 +126,7 @@ class DataPrinter:
         data = database.data["purchaseHistory"]
         data = convert_dict_to_list(data)
         if data == []:
-            # SystemPrinter.menu_no_purchace_historic()
-            print('sem produtos')
+            print('Sem produtos!')
         else:
             table = pd.DataFrame(data, columns = ["Login", "Valor total", "Data da compra"])
             print(table)

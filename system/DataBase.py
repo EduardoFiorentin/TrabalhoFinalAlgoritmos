@@ -1,22 +1,22 @@
 import json
 import sys
-from termcolor import colored, cprint
 import os
 import datetime
 
+# CLASSE QUE CONTROLA A BASE DE DADOS 
 class DataBase: 
     def __init__(self):
         self.data = {}
         self.read_data_base()
 
-    # ler base de dados e mandar pra self.database 
+    # ler base de dados e mandar pra self.data 
     def read_data_base(self):
         with open("database.json") as database:
             data = json.load(database)
         self.data = json.loads(data)
         
 
-    # mandar os dados novos pro self.database (usado pela opção 3)
+    # mandar os dados novos pro self.data (usado pela opção 3)
     def update(self, data:dict()):
         for key, value in self.data.items(): 
             for newkey, newvalue in data.items(): 
@@ -49,14 +49,14 @@ class DataBase:
         with open("database.json", 'w') as database:
             json.dump(json.dumps(newDataBase), database)
 
-    # Verifica se um id existe na base de dados 
+    # Verifica se um produto com id passado existe na base de dados 
     def id_exists(self, id):
         for item in self.data["products"]:
             if item["id"] == id:
                 return True
         return False
 
-    # Verifica se um cliente existe
+    # Verifica se um cliente existe na base de dados 
     def client_exists(self, client:str):
         for user in self.data["users"]:
             if user["login"] == client:

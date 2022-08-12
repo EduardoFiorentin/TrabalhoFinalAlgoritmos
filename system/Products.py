@@ -6,7 +6,7 @@ from SystemPrinter import SystemPrinter, console_clear
 
 class Product: 
 
-    # GERAR NOVO PRODUTO
+    # GERAR NOVO PRODUTO (opção 1)
     @staticmethod 
     def new_product():
         productname = input_value(str, "Nome do produto: ")
